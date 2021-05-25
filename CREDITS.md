@@ -1,6 +1,6 @@
 Software developer (2003) : 
  - Giorgio Spada
- - 
+
 Software investigators (2003) : 
  - Andrea Antonioli
  - Lapo Boschi 
