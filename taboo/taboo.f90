@@ -12541,12 +12541,12 @@ end subroutine  Convol_8_new
 !          dconv_h, dconv_l, dconv_k = their time-derivatives
 !
 !
- If ((hi<0 .or .hi>8) .and. iv==0) then
+ If ((hi<0 .or. hi>8) .and. iv==0) then
   Write(99,*) 'ERROR IN SBR. CONVOL_load_history: Unknown  time history '
   Write(99,*) 'Only histories with label in the range [0:5] are allowed '
   Write(99,*) '******** JOB ABORTED *********************************** ';STOP
  Endif
- If ((hi<0 .or .hi>8) .and. iv==1) then
+ If ((hi<0 .or. hi>8) .and. iv==1) then
   Write(99,*) 'ERROR IN SBR. CONVOL_load_history: Unknown  time history '
   Write(99,*) 'Only histories with label in the range [0:8] are allowed '
   Write(99,*) '******** JOB ABORTED *********************************** '
@@ -15724,12 +15724,12 @@ ENDIF
 !
 IF(ne==30600) then
 If (IR==0.and.dIR==0.and.it==0.and.dit==0.  &
-                            and.IG==0.and.dIG==0.and.iv==0) then 
+                            .and.IG==0.and.dIG==0.and.iv==0) then 
 Write(99,*) 'ERROR IN SBR. TASK_3: At least one of the switches IR, DIR, etc. must '
 Write(99,*) 'be =1 in order to perform an Local_Study. **** JOB ABORTED ********** ';stop
 Endif          
 If (IR==0.and.dIR==0.and.it==0.and.dit==0.  &
-                            and.IG==0.and.dIG==0.and.iv==1) then 
+                            .and.IG==0.and.dIG==0.and.iv==1) then 
 Write(99,*) 'ERROR IN SBR. TASK_3: At least one of the switches IR, DIR, etc. must '
 Write(99,*) 'be =1 in order to perform an Local_Study. **** JOB ABORTED ********** '
 Write(* ,*) 'ERROR IN SBR. TASK_3: At least one of the switches IR, DIR, etc. must '
@@ -17090,12 +17090,12 @@ endif
 !
 IF(ne==20480) THEN
 If (IR==0.and.dIR==0.and.it==0.and.dit==0.  &
-                            and.IG==0.and.dIG==0.and.iv==0) then 
+                            .and.IG==0.and.dIG==0.and.iv==0) then 
 Write(99,*) 'ERROR IN SBR. TASK_2: At least one of the switches IR, DIR, etc. must '
 Write(99,*) 'be =1 in order to perform an Local_Study. **** JOB ABORTED ********** ';stop
 Endif          
 If (IR==0.and.dIR==0.and.it==0.and.dit==0.  &
-                            and.IG==0.and.dIG==0.and.iv==1) then 
+                            .and.IG==0.and.dIG==0.and.iv==1) then 
 Write(99,*) 'ERROR IN SBR. TASK_2: At least one of the switches IR, DIR, etc. must '
 Write(99,*) 'be =1 in order to perform an Local_Study. **** JOB ABORTED ********** '
 Write(* ,*) 'ERROR IN SBR. TASK_2: At least one of the switches IR, DIR, etc. must '
