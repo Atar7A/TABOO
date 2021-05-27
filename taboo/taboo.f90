@@ -651,6 +651,7 @@ end module FOR_TASK3
 !
  USE for_task3
  implicit NONE
+ REAL :: cosd,sind,acosd
 !
 !
 !
@@ -3982,6 +3983,7 @@ ENDIF
   Real(dp) :: V_RATE  ! Velocity of #2 w.r.t. #1, V component        
 !
   Real(dp) :: CC   ! Auxliary variable 
+  REAL :: cosd,sind
 !
 !  
  If(Lon_1<0.D0 .or. Lon_1>360d0) Then 
@@ -7170,6 +7172,7 @@ If(IG==1) CLOSE(51);  If(dIG==1) CLOSE(55)
 !
  logical :: log_1, log_2, &        ! Auxiliary logical variables
             log_3, log_4
+ REAL :: cosd,sind
 !
 !
 !
@@ -7407,6 +7410,7 @@ if( log_1 .or. log_2 ) then
     integer (i4b) :: IOC             ! Realistic ocean variable
     integer (i4b) :: Ld, Md, L, M    ! Degrees & Orders
     integer (i4b) :: Inorm           ! Normalization switch
+    REAL :: cosd,sind
 !
 ! +-----------------------+
 ! | Executable statements |
@@ -7523,6 +7527,7 @@ if( log_1 .or. log_2 ) then
     real(dp)  :: AUX, dom                         ! Auxiliary variables
 !
     integer (i4b) :: IOC      ! Realistic ocean switch
+    REAL :: cosd,sind
 !
 !
 ! +-----------------------+
@@ -8869,6 +8874,7 @@ integer (i4b) :: nl        ! nl = number of radii is always equal to nv+1
 INTEGER (i4b) :: i_loading ! loading/tidal switch (0/1)
 !
 integer (i4b) :: indx, inu, i, ii, j, k, kk, l, ll, m ! do-loop control variables
+REAL :: qfloat
 !
 !
 !
@@ -9079,7 +9085,7 @@ x_el = x_el / rubens
 ! # Derivative of the secular polynomial
 !
 do ii = 0, 3 * 2 * nv - 1  
-ctmp (ii) = co (ii + 1) * qfloat (ii + 1)  
+ ctmp (ii) = co (ii + 1) * qfloat (ii + 1)  
 enddo  
 !
 do m = 1, nroots  
@@ -9297,6 +9303,7 @@ implicit none
 integer (i4b) :: n
 real (qp) :: g (6, 3)  
 real (qp) :: r, ro, a 
+REAL :: qfloat
 !
 g = 0._qp  
 g (1, 1) = - (r** (n - 1) ) / a  
@@ -9369,7 +9376,8 @@ subroutine bf (l,char)
 !
 use COMMON_FOR_SPECTRUM 
 implicit none  
-integer (i4b) :: char, l  
+integer (i4b) :: char, l
+REAL :: qfloat  
 !
 !
 real (qp) :: gamma  
@@ -9405,6 +9413,7 @@ real (qp) :: a (6, 6), b (6, 6)
 real (qp) :: v(24)
 real (qp) :: h1, h2, h3, h4, h5
 real (qp) :: rn
+REAL :: qfloat
 !
 !
 a(:,:) = 0._qp 
@@ -9499,6 +9508,7 @@ real (qp) :: gra, r, rho, za
 real (qp) :: rn
 real (qp) :: a1, a2, a3, a4, b1, b2, b3, b4 
 real (qp) :: c1, c2, c3, c4, d1, d2, d3, d4
+REAL :: qfloat
 !
 !
 a(:,:) = 0._qp 
@@ -9855,6 +9865,7 @@ real (qp) :: rn
 real (qp) :: a1, a2, a3, a4, b1, b2, b3, b4 
 real (qp) :: c1, c2, c3, c4, d1, d2, d3, d4
 real (qp) :: x,y
+REAL :: qfloat
 ac = 0._qp  
 ad = 0._qp  
 bc = 0._qp  
@@ -10174,6 +10185,7 @@ end subroutine prem
  integer (i4b) :: tipo         ! Type of harmonic load
  integer (i4b) :: l            ! Harmonic degree
  integer (i4b) :: Iw           ! Switch for writing or not on load_coeff.dat
+ REAL :: cosd, sind
 !
 !
 !
@@ -10385,7 +10397,7 @@ aux =    (cheb(l+1,amplitude)-cheb(l+2,amplitude))/(float(l)+1.5d0) -        &
  SIGMA(l) = aux 
 ! 
 aux =    - (leg(l+1,0,cosd(amplitude)) - leg(l-1,0,cosd(amplitude)))       * & 
-         4._dp*(1._dp - dcosd(amplitude))**2/3._dp/(1._dp+cosd(amplitude))
+         4._dp*(1._dp - cosd(amplitude))**2/3._dp/(1._dp+cosd(amplitude))
 !
  SIGMA(l) = SIGMA(l) + aux 
 !
@@ -10401,7 +10413,7 @@ aux =    (cheb(1+1,amplitude)-cheb(1+2,amplitude))/(float(1)+1.5d0) -        &
  SIGMA(1) = aux
 ! 
 aux =    - (leg(1+1,0,cosd(amplitude)) - leg(1-1,0,cosd(amplitude)))       * &
-         4._dp*(1._dp - dcosd(amplitude))**2/3._dp/(1._dp+cosd(amplitude))
+         4._dp*(1._dp - cosd(amplitude))**2/3._dp/(1._dp+cosd(amplitude))
 !
  SIGMA(1) = SIGMA(1) + aux
 !
@@ -10546,6 +10558,7 @@ Integer (i4b) :: N_sub     ! Number of subdivisions in longitude
 Integer (i4b) :: Iw        ! =0/1, to print on 'load_coeff.dat' 
 !
 Integer (i4b) :: kk        ! A do-loop control variable
+REAL :: cosd, sind
 !
 !
 !
@@ -10835,6 +10848,7 @@ use COMMON
 implicit none 
 real(dp) :: cheb, x
 integer(i4b) :: n 
+REAL :: cosd,sind
 !
 if (n>=0) then 
   cheb=cosd(n*x) ! x must be given in degrees
@@ -12641,6 +12655,7 @@ END SUBROUTINE CONVOL_load_history
  integer (i4b) :: IK                  ! Ocean correction switch
 !
  logical log_1, log_2, log_3, log_4   ! Auxiliary logical variables
+ REAL :: cosd,sind
 !
 !
 !
@@ -12862,6 +12877,7 @@ END SUBROUTINE AXIS_DISP0
 !                              ! wrt the center pf the load.
 !
  integer (i4b) :: l, m         ! do-loop controla variables
+ REAL :: cosd,sind
 !
 !
 !
@@ -12943,6 +12959,7 @@ real(dp) :: leg ! Associated Legendre function
 !
 !
 integer (i4b) :: l, m  ! do-loops control variables
+REAL :: cosd,sind
 !
 !
  teta_ob  =   observer(2)
@@ -13022,6 +13039,7 @@ End Subroutine Rect_Pressure
  integer (i4b) :: INDOC               ! OCEAN index (0/1)
  real(dp) :: FS(0:LLMAX), FC(0:LLMAX) ! Sines and Cosines
  real(dp) :: BRA1, BRA2, PLM, PLMD    ! Auxiliary variables
+ REAL :: sind,cosd
 !
 !
 !
@@ -13202,6 +13220,7 @@ use COMMON; implicit NONE
  real(dp) :: FS(0:LLMAX), FC(0:LLMAX)   ! Sine & Cosines
 !
  real(dp) :: CFA, BRA1, BRA2, PLM, PLMD ! Auxiliary variables
+ REAL :: cosd,sind
 !
 !
 !
@@ -18000,4 +18019,62 @@ ENDIF !(iup==105)
  end subroutine printtre
 !
 !
-!
+
+!--------------------------------------------------------------
+! I-Fortran intrincis funcitons to G-Fortran implicit functions 
+!--------------------------------------------------------------
+
+!------------------------ [1] sind --------------------------
+
+real function Sind (x) 
+
+   use iso_fortran_env
+   integer, parameter :: sp = real32, dp = real64, qp = real128
+   real (dp) :: x
+   
+   Sind = dble( sin(x*pi/360) )
+
+RETURN
+end function Sind
+
+!------------------------ [2] cosd --------------------------
+
+real function Cosd (x) 
+
+   use iso_fortran_env
+   integer, parameter :: sp = real32, dp = real64, qp = real128
+   real (dp) :: x
+
+   Cosd = cos(x*pi/360)
+
+RETURN
+end function Cosd
+
+!------------------------ [3] acosd --------------------------
+
+real function aCosd (x)
+ 
+   use iso_fortran_env
+   integer, parameter :: sp = real32, dp = real64, qp = real128
+   real (dp) :: x
+
+   aCosd = acos(x)*360/pi
+
+RETURN
+end function aCosd
+
+!------------------------ [4] qfloat --------------------------
+
+real function qfloat (x) 
+
+   !### - Alternative verison o qfloat - ###
+   !use iso_fortran_env
+   !integer, parameter :: sp = real32, dp = real64, qp = real128
+   !qfloat=real(x,qp)
+
+   integer :: x
+
+   qfloat = real(x,16)
+
+RETURN
+end function qfloat
