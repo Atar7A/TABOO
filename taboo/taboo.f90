@@ -2969,7 +2969,7 @@ if(iv==1) Write(* ,*) 'Expanding the loads in spherical harmonics ...'
 	    DO 222 K=1, NOBS
 !           ++++++++++++++++
 !
-            ela0=etime(txt)
+!            ela0=etime(txt)           !TAKE-OUT DEBUGGING
 !
                OBS(1) = LONG_OBS(K)
 	       OBS(2) = COLA_OBS(K)
@@ -2987,7 +2987,7 @@ if(iv==1) Write(* ,*) 'Expanding the loads in spherical harmonics ...'
                OPEN(31,file='coeff.tmp',status='UNKNOWN',form='unformatted')
 !
 !
-                  ela1=ETIME(txt)
+!                  ela1=ETIME(txt)     !TAKE-OUT DEBUGGING
 !
                   mice = 0.D0
 !
@@ -3046,9 +3046,9 @@ if(iv==1) Write(* ,*) 'Expanding the loads in spherical harmonics ...'
  111 CONTINUE   ! Enddo on time
 !-------------
 
-  ela4=etime(txt)
+!  ela4=etime(txt)                                                            !TAKE-OUT DEBUGGING
 !
-            WRITE(99,*) 'Time elapsed for an observer (s) =', ela4-ela0
+!            WRITE(99,*) 'Time elapsed for an observer (s) =', ela4-ela0      !TAKE-OUT DEBUGGING
 !
 !
 !+++++++++++++
@@ -3122,7 +3122,7 @@ IF(i_thi==1) OPEN(56,file='load_thick.dat',status='unknown')
      DO 2227 K=1, NOBS
 !========================
 !
-        ela0=etime(txt)
+!        ela0=etime(txt)     !TAKE-OUT DEBUGGING
 !
          OBS(1) = LONG_OBS(K)
          OBS(2) = COLA_OBS(K)
@@ -3191,7 +3191,7 @@ IF(i_thi==1) OPEN(56,file='load_thick.dat',status='unknown')
  Close(31) 
 !
 !
- Ela4=Etime(txt)
+! Ela4=Etime(txt)   !TAKE-OUT DEBUGGING
 !
 !
  Write(99 ,'(a26,i5,a2,i6,a1,f14.5,a1)') &
@@ -3244,7 +3244,7 @@ IF(iv==1)  WRITE(* ,*) 'Local analysis of type #4 (baselines) please WAIT ...'
 !
          OPEN(31,file='coeff.tmp',status='UNKNOWN',form='unformatted')
 !
-         ela0=etime(txt)
+!         ela0=etime(txt)     !TAKE-OUT DEBUGGING
 !
          OBS_1 (1) = LONG_Site_1 (K); OBS_1 (2) = COLA_Site_1 (K)
          OBS_2 (1) = LONG_Site_2 (K); OBS_2 (2) = COLA_Site_2 (K)
@@ -3314,9 +3314,9 @@ ENDIF
  CLOSE(31)
 !
 !
- Ela4=Etime(txt)
- WRITE (99,'(a30,i5,a3,i6,a1,f14.5,a1)') &
-            'Elapsed time for the couple #', k,' of', nobs,'=',ela4-ela0,'s'
+! Ela4=Etime(txt)                                                                 !TAKE-OUT DEBUGGING
+! WRITE (99,'(a30,i5,a3,i6,a1,f14.5,a1)') &                                       !TAKE-OUT DEBUGGING
+!            'Elapsed time for the couple #', k,' of', nobs,'=',ela4-ela0,'s'     !TAKE-OUT DEBUGGING
 !
 !+------------------ 
   2127    Continue    ! enddo on the couples of sites
@@ -3407,7 +3407,7 @@ IF(iv==1)  WRITE(* ,*) 'Global analysis of type #1 (Stokes) ...'
         TIME_BP = (i-1)*DTI + T1
 !       +==========================+
 !
-        Ela0 = Etime(txt)
+!        Ela0 = Etime(txt)         !TAKE-OUT DEBUGGING
 !
         MICE  = 0.D0
 !
@@ -3451,7 +3451,7 @@ IF(iv==1)  WRITE(* ,*) 'Global analysis of type #1 (Stokes) ...'
 !+...............+
 !
 !
-   Ela4 = Etime(txt)
+!   Ela4 = Etime(txt)           !TAKE-OUT DEBUGGING
 !
    Fact1= 1D6
    Fact2= 1D11
@@ -3564,7 +3564,7 @@ IF(iv==1)  WRITE(* ,*) 'Global analysis of type #1 (Stokes) ...'
         TIME_BP = (i-1)*DTI + T1  
 !-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-
 !
-        Ela0 = Etime(txt)
+!        Ela0 = Etime(txt)                 !TAKE-OUT DEBUGGING
 !
         MICE = 0.D0 
 !
