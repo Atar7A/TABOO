@@ -2181,8 +2181,8 @@ IF (FRTD==1.AND.(name_agg=='Ice_1'.or.name_agg=='Ice_2')) THEN
 !
        C_L (j) = 10
 !
-       Amplit (j)    = acosd( 1.0 - sind(cola_c(j))*sind(d_cola(j)/2.)* &
-                              d_long(j)*pi/180.0/pi)
+       Amplit (j)    = acosd( dble(1.0 - sind(dble(cola_c(j)))*sind(dble(d_cola(j)/2.))* &
+                              d_long(j)*pi/180.0/pi) )
 !
    Write (99,*) &
             'After conversion, the element is of type CL = ',C_L(j)
@@ -7251,9 +7251,9 @@ If(IG==1) CLOSE(51);  If(dIG==1) CLOSE(55)
 !
     DO 100 M = 0, L 
 !
-    PLM  =     Leg(l,m,cosd(teta_obs)) 
+    PLM  =     Leg(l,m,dble(cosd(teta_obs))) 
 !
-    COEFF = GPROD(l,m) * CFA * LEG (l,m,cosd(teta_cen)) 
+    COEFF = GPROD(l,m) * CFA * LEG (l,m,dble(cosd(teta_cen))) 
 !
 !
     If(IR==1.or.dIR==1.or.IG==1.or.dIG==1) THEN 
@@ -7272,7 +7272,7 @@ If(IG==1) CLOSE(51);  If(dIG==1) CLOSE(55)
 !						     
     If(it==1.or.dit==1)  THEN
 !
-    PLMD = Legdev1(l,m,cosd(teta_obs))     
+    PLMD = Legdev1(l,m,dble(cosd(teta_obs)))     
 !
     BRA1 =  (2d0-delta(m))*COEFF*(OBS_C(m)*CEN_C(m) + OBS_S(m)*CEN_S(m)) * PLMD
 !
@@ -7461,7 +7461,7 @@ if( log_1 .or. log_2 ) then
 !
          AUX = (4._DP*PI*RAGGIO*RAGGIO/EMASS)*(2._DP-DOM) *     &
                (SIGMA(L)/(2._DP*L+1._DP))*GPROD(L,M)      *     &
-               LEG(L,M,COSD(TETA_CEN))
+               LEG(L,M,dble(COSD(TETA_CEN)))
 !
          Ci    =   conv_k(L) * AUX * COSD (M*LONG_CEN) 
          Si    =   conv_k(L) * AUX * SIND (M*LONG_CEN)
@@ -7573,30 +7573,30 @@ if( log_1 .or. log_2 ) then
        IF ( IOC ==0 .or. IOC ==1 ) THEN
 !
        INE (1,1) = (4._DP*PI*RAGGIO*RAGGIO/15._DP/EMASS)           *  & 
-                       SIGMA(2)*conv_k(2)*LEG(2,0,COSD(TETA_CEN))   -  &
+                       SIGMA(2)*conv_k(2)*LEG(2,0,dble(COSD(TETA_CEN)))   -  &
                        (2._DP*PI*RAGGIO*RAGGIO/15._DP/EMASS)           *  &
-                       SIGMA(2)*conv_k(2)*LEG(2,2,COSD(TETA_CEN))   *  &
+                       SIGMA(2)*conv_k(2)*LEG(2,2,dble(COSD(TETA_CEN)))   *  &
                        COSD(2._DP*LONG_CEN)
 !
        INE (2,2) = (4._DP*PI*RAGGIO*RAGGIO/15._DP/EMASS)           *  & 
-                       SIGMA(2)*conv_k(2)*LEG(2,0,COSD(TETA_CEN))   +  &
+                       SIGMA(2)*conv_k(2)*LEG(2,0,dble(COSD(TETA_CEN)))   +  &
                        (2._DP*PI*RAGGIO*RAGGIO/15._DP/EMASS)           *  &
-                       SIGMA(2)*conv_k(2)*LEG(2,2,COSD(TETA_CEN))   *  &
+                       SIGMA(2)*conv_k(2)*LEG(2,2,dble(COSD(TETA_CEN)))   *  &
                        COSD(2._DP*LONG_CEN)
 !
        INE (3,3) = - (8._DP*PI*RAGGIO*RAGGIO/15._DP/EMASS)         *  & 
-                       SIGMA(2)*conv_k(2)*LEG(2,0,COSD(TETA_CEN))      
+                       SIGMA(2)*conv_k(2)*LEG(2,0,dble(COSD(TETA_CEN)))      
 !
        INE (1,3) = (4._DP*PI*RAGGIO*RAGGIO/15._DP/EMASS)           *  & 
-                       SIGMA(2)*conv_k(2)*LEG(2,1,COSD(TETA_CEN))   *  & 
+                       SIGMA(2)*conv_k(2)*LEG(2,1,dble(COSD(TETA_CEN)))   *  & 
                        COSD(1._DP*LONG_CEN)
 !
        INE (2,3) = (4._DP*PI*RAGGIO*RAGGIO/15._DP/EMASS)           *  & 
-                       SIGMA(2)*conv_k(2)*LEG(2,1,COSD(TETA_CEN))   *  & 
+                       SIGMA(2)*conv_k(2)*LEG(2,1,dble(COSD(TETA_CEN)))   *  & 
                        SIND(1._DP*LONG_CEN)
 !
        INE (1,2) = - (2._DP*PI*RAGGIO*RAGGIO/15._DP/EMASS)         *  & 
-                       SIGMA(2)*conv_k(2)*LEG(2,2,COSD(TETA_CEN))   *  &     
+                       SIGMA(2)*conv_k(2)*LEG(2,2,dble(COSD(TETA_CEN)))   *  &     
                        SIND(2._DP*LONG_CEN)
 !
        INE (2,1) = INE (1,2) 
@@ -7610,30 +7610,30 @@ if( log_1 .or. log_2 ) then
 !
 !   
        D_INE (1,1) = (4._DP*PI*RAGGIO*RAGGIO/15._DP/EMASS)           *  & 
-                       SIGMA(2)*Dconv_k(2)*LEG(2,0,COSD(TETA_CEN))   -  &
+                       SIGMA(2)*Dconv_k(2)*LEG(2,0,dble(COSD(TETA_CEN)))   -  &
                        (2._DP*PI*RAGGIO*RAGGIO/15._DP/EMASS)           *  &
-                       SIGMA(2)*Dconv_k(2)*LEG(2,2,COSD(TETA_CEN))   *  &
+                       SIGMA(2)*Dconv_k(2)*LEG(2,2,dble(COSD(TETA_CEN)))   *  &
                        COSD(2._DP*LONG_CEN)
 !
        D_INE (2,2) = (4._DP*PI*RAGGIO*RAGGIO/15._DP/EMASS)           *  & 
-                       SIGMA(2)*Dconv_k(2)*LEG(2,0,COSD(TETA_CEN))   +  &
+                       SIGMA(2)*Dconv_k(2)*LEG(2,0,dble(COSD(TETA_CEN)))   +  &
                        (2._DP*PI*RAGGIO*RAGGIO/15._DP/EMASS)           *  &
-                       SIGMA(2)*Dconv_k(2)*LEG(2,2,COSD(TETA_CEN))   *  &
+                       SIGMA(2)*Dconv_k(2)*LEG(2,2,dble(COSD(TETA_CEN)))   *  &
                        COSD(2._DP*LONG_CEN)
 !
        D_INE (3,3) = - (8._DP*PI*RAGGIO*RAGGIO/15._DP/EMASS)         *  & 
-                       SIGMA(2)*Dconv_k(2)*LEG(2,0,COSD(TETA_CEN))      
+                       SIGMA(2)*Dconv_k(2)*LEG(2,0,dble(COSD(TETA_CEN)))      
 !
        D_INE (1,3) = (4._DP*PI*RAGGIO*RAGGIO/15._DP/EMASS)           *  & 
-                       SIGMA(2)*Dconv_k(2)*LEG(2,1,COSD(TETA_CEN))   *  & 
+                       SIGMA(2)*Dconv_k(2)*LEG(2,1,dble(COSD(TETA_CEN)))   *  & 
                        COSD(1._DP*LONG_CEN)
 !
        D_INE (2,3) = (4._DP*PI*RAGGIO*RAGGIO/15._DP/EMASS)           *  & 
-                       SIGMA(2)*Dconv_k(2)*LEG(2,1,COSD(TETA_CEN))   *  & 
+                       SIGMA(2)*Dconv_k(2)*LEG(2,1,dble(COSD(TETA_CEN)))   *  & 
                        SIND(1._DP*LONG_CEN)
 !
        D_INE (1,2) = - (2._DP*PI*RAGGIO*RAGGIO/15._DP/EMASS)         *  & 
-                       SIGMA(2)*Dconv_k(2)*LEG(2,2,COSD(TETA_CEN))   *  &     
+                       SIGMA(2)*Dconv_k(2)*LEG(2,2,dble(COSD(TETA_CEN)))   *  &     
                        SIND(2._DP*LONG_CEN)
 !
        D_INE (2,1) = D_INE (1,2) 
@@ -10332,7 +10332,7 @@ do l = lmin, lmax
 !
  SIGMA(l) = (-0.5d0)*rhoice*h*                                &
              ( 		             			      &
- leg(l+1,0,cosd(amplitude)) - leg(l-1,0,cosd(amplitude))      &
+ leg(l+1,0,dble(cosd(amplitude))) - leg(l-1,0,dble(cosd(amplitude)))      &
              )                                                 
 !
 enddo 
@@ -10341,7 +10341,7 @@ enddo
 !
  SIGMA(1) =  (-0.5d0)*rhoice*h*                                &
              ( 		             			      &
- leg(1+1,0,cosd(amplitude)) - leg(1-1,0,cosd(amplitude))      &
+ leg(1+1,0,dble(cosd(amplitude))) - leg(1-1,0,dble(cosd(amplitude)))      &
              )                                                 
 !
 ENDIF  
@@ -10362,7 +10362,7 @@ do l = lmin, lmax
 !
  SIGMA(l) = -(rhoice*h)*                                      &
              ( 		             			      &
- leg(l+1,0,cosd(amplitude)) - leg(l-1,0,cosd(amplitude))      &
+ leg(l+1,0,dble(cosd(amplitude))) - leg(l-1,0,dble(cosd(amplitude)))      &
              )/                                               &
              (1._dp + cosd(amplitude)) 
 !
@@ -10372,7 +10372,7 @@ enddo
 !
  SIGMA(1) = -(rhoice*h)*                                      &
              ( 		             			      &
- leg(1+1,0,cosd(amplitude)) - leg(1-1,0,cosd(amplitude))      &
+ leg(1+1,0,dble(cosd(amplitude))) - leg(1-1,0,dble(cosd(amplitude)))      &
              )/                                               &
              (1._dp + cosd(amplitude))  
 !
@@ -10424,7 +10424,7 @@ aux =    (cheb(l+1,amplitude)-cheb(l+2,amplitude))/(float(l)+1.5d0) -        &
 !
  SIGMA(l) = aux 
 ! 
-aux =    - (leg(l+1,0,cosd(amplitude)) - leg(l-1,0,cosd(amplitude)))       * & 
+aux =    - (leg(l+1,0,dble(cosd(amplitude))) - leg(l-1,0,dble(cosd(amplitude))))       * & 
          4._dp*(1._dp - cosd(amplitude))**2/3._dp/(1._dp+cosd(amplitude))
 !
  SIGMA(l) = SIGMA(l) + aux 
@@ -10440,7 +10440,7 @@ aux =    (cheb(1+1,amplitude)-cheb(1+2,amplitude))/(float(1)+1.5d0) -        &
 !
  SIGMA(1) = aux
 ! 
-aux =    - (leg(1+1,0,cosd(amplitude)) - leg(1-1,0,cosd(amplitude)))       * &
+aux =    - (leg(1+1,0,dble(cosd(amplitude))) - leg(1-1,0,dble(cosd(amplitude))))       * &
          4._dp*(1._dp - cosd(amplitude))**2/3._dp/(1._dp+cosd(amplitude))
 !
  SIGMA(1) = SIGMA(1) + aux
@@ -13016,7 +13016,7 @@ REAL :: cosd,sind
 !
            PP = PP + ( FF(L,M)* COSD(M*LONG_OB)   + & 
 	               GG(L,M)* SIND(M*LONG_OB) ) * & 
-	               LEG (L,M,COSD(TETA_OB))  
+	               LEG (L,M,dble(COSD(TETA_OB)))  
 !
           ENDDO	         
         ENDDO         
@@ -13135,7 +13135,7 @@ End Subroutine Rect_Pressure
 !
         DO M=0, L 
 !
-        PLM = LEG (L,M,COSD(TETA_OB)) 
+        PLM = LEG (L,M,dble(COSD(TETA_OB))) 
 !
 !
         If(IR==1.or.dIR==1.or.IG==1.or.dIG==1) THEN 
@@ -13152,7 +13152,7 @@ End Subroutine Rect_Pressure
 !
         If(it==1.or.dit==1) THEN 
 !
-	PLMD= LEGDEV1(L,M,COSD(TETA_OB))
+	PLMD= LEGDEV1(L,M,dble(COSD(TETA_OB)))
 !
         BRA1= (FF(L,M)*FC(M) + GG(L,M)*FS(M)) * PLMD * CFA 
 	BRA2= (GG(L,M)*FC(M) - FF(L,M)*FS(M)) *  PLM * CFA * M  
@@ -13294,7 +13294,7 @@ use COMMON; implicit NONE
 !
         If(IR==1.or.dIR==1.or.IG==1.or.dIG==1) THEN 
 !
-        PLM = LEG    (L,M,COSD(TETA_OB)) 
+        PLM = LEG    (L,M,dble(COSD(TETA_OB))) 
 !
         BRA1= (OC(L,M)*FC(M) + OS(L,M)*FS(M)) * PLM * CFA  
 !
@@ -13308,8 +13308,8 @@ use COMMON; implicit NONE
 !
         If(it==1.or.dit==1) THEN 
 !
-        PLM = LEG    (L,M,COSD(TETA_OB)) 
-	PLMD= LEGDEV1(L,M,COSD(TETA_OB))
+        PLM = LEG    (L,M,dble(COSD(TETA_OB))) 
+	PLMD= LEGDEV1(L,M,dble(COSD(TETA_OB)))
 !
         BRA1= (OC(L,M)*FC(M) + OS(L,M)*FS(M)) * PLMD * CFA 
 	BRA2= (OS(L,M)*FC(M) - OC(L,M)*FS(M)) *  PLM * CFA * M  
