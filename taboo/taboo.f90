@@ -2977,7 +2977,11 @@ if(iv==1) Write(* ,*) 'Expanding the loads in spherical harmonics ...'
                call printtre (101)   ! puts an header on disp.his & rate.his
 !
 !              ----------------------------
-               DO 111 TIME_BP = T1, T2, DTI
+!OLD VERSION [FLOAT]         DO 111 TIME_BP = T1, T2, DTI
+!NEW VERSION [INTEGER]       -> Debugging additions (!! To check conflicts [i] !!)
+
+               DO 111 i = 1, nint((T2-T1)/DTI) +1         !DEBUGGING ADDITION
+               TIME_BP = (i-1)*DTI + T1                   !DEBUGGING ADDITION
 !              ----------------------------
 !
                OPEN(31,file='coeff.tmp',status='UNKNOWN',form='unformatted')
@@ -3396,7 +3400,11 @@ IF(iv==1)  WRITE(* ,*) 'Global analysis of type #1 (Stokes) ...'
 !                           
 !
 !       +==========================+
-	Do 131 TIME_BP = T1, T2, DTI
+!OLD VERSION [FLAOT]    Do 131 TIME_BP = T1, T2, DTI
+!NEW VERSION [INTEGER]  -> Debugging additions (!! To check conflicts [i] !!) 
+     
+	Do 131 i = 1, nint((T2-T1)/DTI) + 1
+        TIME_BP = (i-1)*DTI + T1
 !       +==========================+
 !
         Ela0 = Etime(txt)
@@ -3549,7 +3557,11 @@ IF(iv==1)  WRITE(* ,*) 'Global analysis of type #1 (Stokes) ...'
 !
 !
 !-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-
-	Do 141 TIME_BP = T1, T2, DTI
+!OLD VERSION [FLOAT]      Do 141 TIME_BP = T1, T2, DTI
+!NEW VERSION [INTEGER]    -> Debugging additios (!! To check conflicts [i] !!)
+
+	Do 141 i = 1, nint((T2-T1)/DTI) + 1
+        TIME_BP = (i-1)*DTI + T1  
 !-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-
 !
         Ela0 = Etime(txt)
@@ -6445,8 +6457,13 @@ Endif
 !
         call printdue (101)   ! Puts an header on disp.his & rate.his    
 !
+!OLD VERSION [FLOAT]     Do 111 TIME = TMIN, TMAX, DELTAT
+!NEW VERSION [INTEGER]   -> Debugging additions (!! to check conflicts [i] !!)
+ 
 
-	Do 111 TIME = TMIN, TMAX, DELTAT 
+	Do 111 i = 1, nint((TMAX-TMIN)/DELTAT)+1           !DEBUGGING ADDITION 
+
+          TIME = (i-1)*DELTAT + TMIN                        !DEBUGGING ADDITION
 !
 	  Call CONVOL_load_history (lh, time)
 !
@@ -6788,7 +6805,13 @@ If(IG==1) CLOSE(51);  If(dIG==1) CLOSE(55)
      CEN(2) = TETA_CEN 
 !
 !
-   Do 1111 TIME = TMIN, TMAX, DELTAT 
+!OLD VERSION [FLOAT]     Do 1111 TIME = TMIN, TMAX, DELTAT
+!NEW VERSION [INTEGER]   -> Debugging additions (z used to avoid conflicts)
+
+   Do 1111 i = 1, nint((TMAX-TMIN)/DELTAT)+1
+        
+        TIME = (i-1)*DELTAT + TMIN 
+!
 !
         MICE=0.d0 
 !
@@ -7013,7 +7036,12 @@ If(IG==1) CLOSE(51);  If(dIG==1) CLOSE(55)
      CEN(1) = LONG_CEN
      CEN(2) = TETA_CEN   
 !
-	Do 1112 TIME = TMIN, TMAX, DELTAT  
+!OLD VERSION [FLOAT]     Do 1112 TIME = TMIN, TMAX, DELTAT 
+!NEW VERSION [INTEGER]   -> Debugging additions (!! To check conflicts [i] !!) 
+
+	Do 1112 i=1, nint((TMAX-TMIN)/DELTAT)+1
+        
+        TIME = (i-1)*DELTAT + TMIN 
 !
         Mice=0.d0 
 !
